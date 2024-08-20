@@ -14,4 +14,10 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PayMart.Application.Orders\PayMart.Application.Orders.csproj" />
+    <ProjectReference Include="..\PayMart.Domain.Orders\PayMart.Domain.Orders.csproj" />
+    <ProjectReference Include="..\PayMart.Infrastructure.Orders\PayMart.Infrastructure.Orders.csproj" />
+  </ItemGroup>
+
 </Project>
