@@ -14,6 +14,7 @@ public class OrderController : ControllerBase
         [FromServices] IPostOrderUseCases useCases,
         [FromBody] RequestOrder request)
     {
-        return Ok();
+        var response = await useCases.Execute(request);
+        return Ok(response);    
     }
 }
