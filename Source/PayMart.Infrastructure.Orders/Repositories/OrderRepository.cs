@@ -1,10 +1,13 @@
-﻿using PayMart.Domain.Orders.Interface.Database;
+﻿using PayMart.Domain.Orders.Entities;
+using PayMart.Domain.Orders.Interface.Database;
+using PayMart.Domain.Orders.Interface.Orders;
 using PayMart.Infrastructure.Orders.DataAcess;
 
 namespace PayMart.Infrastructure.Orders.Repositories;
 
 public class OrderRepository :
-    ICommit
+    ICommit,
+    IPost
 {
     private readonly DbOrder _dbOrder;
     public OrderRepository(DbOrder dbOrder)
@@ -12,8 +15,8 @@ public class OrderRepository :
         _dbOrder = dbOrder;
     }
 
-    public Task Commit()
-    {
-        throw new NotImplementedException();
-    }
+    public async Task Commit() => await _dbOrder.SaveChangesAsync();
+
+    public async Task Post(Order order) => await _dbOrder.Tb_Order.AddAsync(order); 
+
 }
