@@ -1,6 +1,9 @@
-﻿namespace PayMart.Domain.Orders.Response.ListOfOrder;
+﻿
+using PayMart.Domain.Orders.Response.Order;
+
+namespace PayMart.Domain.Orders.Response.ListOfOrder;
 
 public class ResponseList
 {
-    public List<ResponseList> Order { get; set; } = [];
+    public List<ResponseOrder> Orders { get; set; } = [];
 }
