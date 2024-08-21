@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PayMart.Application.Orders.UseCases.GetAll;
+using PayMart.Application.Orders.UseCases.GetID;
 using PayMart.Application.Orders.UseCases.Post;
 using PayMart.Domain.Orders.Request;
 
@@ -18,6 +19,15 @@ public class OrderController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet]
+    [Route("getID")]
+    public async Task<IActionResult> GetID(
+        [FromHeader] int id,
+        [FromServices] IGetIDOrderUseCases useCases)
+    {
+        var response = await useCases.Execute(id);
+        return Ok(response);
+    }
 
     [HttpPost]
     [Route("post")]
