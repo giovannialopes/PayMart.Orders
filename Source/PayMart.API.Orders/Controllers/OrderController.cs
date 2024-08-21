@@ -2,6 +2,7 @@
 using PayMart.Application.Orders.UseCases.GetAll;
 using PayMart.Application.Orders.UseCases.GetID;
 using PayMart.Application.Orders.UseCases.Post;
+using PayMart.Application.Orders.UseCases.Update;
 using PayMart.Domain.Orders.Request;
 
 namespace PayMart.API.Orders.Controllers;
@@ -20,9 +21,9 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet]
-    [Route("getID")]
+    [Route("getID/{id}")]
     public async Task<IActionResult> GetID(
-        [FromHeader] int id,
+        [FromRoute] int id,
         [FromServices] IGetIDOrderUseCases useCases)
     {
         var response = await useCases.Execute(id);
@@ -39,5 +40,15 @@ public class OrderController : ControllerBase
         return Ok(response);    
     }
 
+    [HttpPut]
+    [Route("update/{id}")]
+    public async Task<IActionResult> Update(
+        [FromServices] IUpdateOrderUseCases useCases,
+        [FromRoute] int id,
+        [FromBody] RequestOrder request)
+    {
+        var response = await useCases.Execute(request, id);
+        return Ok(response);    
+    }
 
 }

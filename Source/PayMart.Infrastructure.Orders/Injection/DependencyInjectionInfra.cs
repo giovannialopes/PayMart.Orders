@@ -5,6 +5,7 @@ using PayMart.Domain.Orders.Interface.Database;
 using PayMart.Domain.Orders.Interface.Orders.GetAll;
 using PayMart.Domain.Orders.Interface.Orders.GetID;
 using PayMart.Domain.Orders.Interface.Orders.Post;
+using PayMart.Domain.Orders.Interface.Orders.Update;
 using PayMart.Infrastructure.Orders.DataAcess;
 using PayMart.Infrastructure.Orders.Repositories;
 
@@ -24,6 +25,7 @@ public static class DependencyInjectionInfra
         services.AddScoped<IPost, OrderRepository>();
         services.AddScoped<IGetAll, OrderRepository>();
         services.AddScoped<IGetID, OrderRepository>();
+        services.AddScoped<IUpdate, OrderRepository>();
     }
 
     public static void AddDbContext(IServiceCollection services, IConfiguration configuration)

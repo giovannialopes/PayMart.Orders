@@ -4,6 +4,7 @@ using PayMart.Domain.Orders.Interface.Database;
 using PayMart.Domain.Orders.Interface.Orders.GetAll;
 using PayMart.Domain.Orders.Interface.Orders.GetID;
 using PayMart.Domain.Orders.Interface.Orders.Post;
+using PayMart.Domain.Orders.Interface.Orders.Update;
 using PayMart.Infrastructure.Orders.DataAcess;
 
 namespace PayMart.Infrastructure.Orders.Repositories;
@@ -12,7 +13,8 @@ public class OrderRepository :
     ICommit,
     IPost,
     IGetAll,
-    IGetID
+    IGetID,
+    IUpdate
 {
     private readonly DbOrder _dbOrder;
     public OrderRepository(DbOrder dbOrder)
@@ -26,7 +28,8 @@ public class OrderRepository :
 
     public async Task<Order?> GetID(int id) => await _dbOrder.Tb_Order.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
 
+    public async Task Add(Order order) => await _dbOrder.Tb_Order.AddAsync(order);
 
-    public async Task Post(Order order) => await _dbOrder.Tb_Order.AddAsync(order); 
+    public void Update(Order order) => _dbOrder.Tb_Order.Update(order);
 
 }

@@ -4,5 +4,5 @@ namespace PayMart.Domain.Orders.Interface.Orders.Post;
 
 public interface IPost
 {
-    Task Post(Order order);
+    Task Add(Order order);
 }

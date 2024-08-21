@@ -26,7 +26,7 @@ public class PostOrderUseCases : IPostOrderUseCases
     {
         var Order = _mapper.Map<Order>(request);
 
-        await _post.Post(Order);
+        await _post.Add(Order);
 
         await _commit.Commit();
 
