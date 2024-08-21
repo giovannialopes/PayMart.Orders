@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PayMart.Domain.Orders.Interface.Database;
+using PayMart.Domain.Orders.Interface.Orders.Delete;
 using PayMart.Domain.Orders.Interface.Orders.GetAll;
 using PayMart.Domain.Orders.Interface.Orders.GetID;
 using PayMart.Domain.Orders.Interface.Orders.Post;
@@ -26,6 +27,7 @@ public static class DependencyInjectionInfra
         services.AddScoped<IGetAll, OrderRepository>();
         services.AddScoped<IGetID, OrderRepository>();
         services.AddScoped<IUpdate, OrderRepository>();
+        services.AddScoped<IDelete, OrderRepository>();
     }
 
     public static void AddDbContext(IServiceCollection services, IConfiguration configuration)

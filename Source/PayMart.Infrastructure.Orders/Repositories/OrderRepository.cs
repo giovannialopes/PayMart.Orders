@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PayMart.Domain.Orders.Entities;
 using PayMart.Domain.Orders.Interface.Database;
+using PayMart.Domain.Orders.Interface.Orders.Delete;
 using PayMart.Domain.Orders.Interface.Orders.GetAll;
 using PayMart.Domain.Orders.Interface.Orders.GetID;
 using PayMart.Domain.Orders.Interface.Orders.Post;
@@ -14,7 +15,8 @@ public class OrderRepository :
     IPost,
     IGetAll,
     IGetID,
-    IUpdate
+    IUpdate,
+    IDelete
 {
     private readonly DbOrder _dbOrder;
     public OrderRepository(DbOrder dbOrder)
@@ -32,4 +34,9 @@ public class OrderRepository :
 
     public void Update(Order order) => _dbOrder.Tb_Order.Update(order);
 
+    public async Task Delete(int id)
+    {
+        var response = await _dbOrder.Tb_Order.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
+        _dbOrder.Tb_Order.Remove(response!);
+    }
 }
