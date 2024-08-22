@@ -12,8 +12,8 @@ using PayMart.Infrastructure.Orders.DataAcess;
 namespace PayMart.Infrastructure.Orders.Migrations
 {
     [DbContext(typeof(DbOrder))]
-    [Migration("20240820232006_InitialCommit")]
-    partial class InitialCommit
+    [Migration("20240822080730_FixPositionDb")]
+    partial class FixPositionDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

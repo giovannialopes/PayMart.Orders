@@ -2,6 +2,11 @@
 
 public class ResponseOrder
 {
-    public DateTime Date { get; set; } = DateTime.Now;
+    public int Id { get; set; }
     public string Name { get; set; } = "";
+    public int ProductID { get; set; }
+    public DateTime Date { get; set; }
+
+    public int UserID { get; set; }
+
 }

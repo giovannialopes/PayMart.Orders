@@ -32,24 +32,27 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
-    [Route("post")]
+    [Route("post/{userID}")]
     public async Task<IActionResult> Post(
         [FromServices] IPostOrderUseCases useCases,
-        [FromBody] RequestOrder request)
+        [FromBody] RequestOrder request,
+        [FromRoute] int userID)
     {
+        request.UserID = userID;
         var response = await useCases.Execute(request);
-        return Ok(response);    
+        return Ok(response);
     }
 
     [HttpPut]
-    [Route("update/{id}")]
+    [Route("update/{id}/{userID}")]
     public async Task<IActionResult> Update(
         [FromServices] IUpdateOrderUseCases useCases,
-        [FromRoute] int id,
+        [FromRoute] int id, int userID,
         [FromBody] RequestOrder request)
     {
+        request.ProductID = userID;
         var response = await useCases.Execute(request, id);
-        return Ok(response);    
+        return Ok(response);
     }
 
     [HttpDelete]
@@ -58,7 +61,7 @@ public class OrderController : ControllerBase
         [FromServices] IDeleteOrderUseCases useCases,
         [FromRoute] int id)
     {
-         await useCases.Execute(id);
+        await useCases.Execute(id);
         return Ok();
     }
 
