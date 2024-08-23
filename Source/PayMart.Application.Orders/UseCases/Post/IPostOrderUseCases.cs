@@ -1,5 +1,5 @@
 ﻿using PayMart.Domain.Orders.Request;
-using PayMart.Domain.Orders.Response.Order;
+using PayMart.Domain.Orders.Response.Order.Others;
 
 namespace PayMart.Application.Orders.UseCases.Post;
 

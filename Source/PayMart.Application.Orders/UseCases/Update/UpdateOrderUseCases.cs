@@ -5,7 +5,7 @@ using PayMart.Domain.Orders.Interface.Orders.GetID;
 using PayMart.Domain.Orders.Interface.Orders.Post;
 using PayMart.Domain.Orders.Interface.Orders.Update;
 using PayMart.Domain.Orders.Request;
-using PayMart.Domain.Orders.Response.Order;
+using PayMart.Domain.Orders.Response.Order.Others;
 
 namespace PayMart.Application.Orders.UseCases.Update;
 
@@ -27,7 +27,7 @@ public class UpdateOrderUseCases : IUpdateOrderUseCases
         _commit = commit;
     }
 
-    public async Task<ResponseOrder> Execute(RequestOrder request, int id)
+    public async Task<ResponseOrder> Execute(RequestOrderUpdate request, int id)
     {
         var Order = await _getID.GetID(id);
 

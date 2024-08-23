@@ -4,7 +4,7 @@ using PayMart.Domain.Orders.Interface.Database;
 using PayMart.Domain.Orders.Interface.Orders.GetID;
 using PayMart.Domain.Orders.Interface.Orders.Post;
 using PayMart.Domain.Orders.Request;
-using PayMart.Domain.Orders.Response.Order;
+using PayMart.Domain.Orders.Response.Order.Others;
 
 namespace PayMart.Application.Orders.UseCases.Post;
 
@@ -29,8 +29,6 @@ public class PostOrderUseCases : IPostOrderUseCases
     public async Task<ResponseOrder> Execute(RequestOrder request)
     {
         var Order = _mapper.Map<Order>(request);
-
-        Order.Date = DateTime.Now;
 
         await _post.Add(Order);
 

@@ -48,7 +48,7 @@ public class OrderController : ControllerBase
     public async Task<IActionResult> Update(
         [FromServices] IUpdateOrderUseCases useCases,
         [FromRoute] int id, int userID,
-        [FromBody] RequestOrder request)
+        [FromBody] RequestOrderUpdate request)
     {
         request.ProductID = userID;
         var response = await useCases.Execute(request, id);

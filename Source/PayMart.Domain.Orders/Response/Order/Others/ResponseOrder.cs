@@ -1,4 +1,4 @@
-﻿namespace PayMart.Domain.Orders.Response.Order;
+﻿namespace PayMart.Domain.Orders.Response.Order.Others;
 
 public class ResponseOrder
 {

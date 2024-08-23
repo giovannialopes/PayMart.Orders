@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using PayMart.Domain.Orders.Interface.Database;
 using PayMart.Domain.Orders.Interface.Orders.GetID;
-using PayMart.Domain.Orders.Response.Order;
+using PayMart.Domain.Orders.Response.Order.GetAll;
+using PayMart.Domain.Orders.Response.Order.Others;
 
 namespace PayMart.Application.Orders.UseCases.GetID;
 
@@ -18,10 +19,10 @@ public class GetIDOrderUseCases : IGetIDOrderUseCases
         _getID = getID;
     }
 
-    public async Task<ResponseOrder> Execute(int id)
+    public async Task<ResponseOrderGet> Execute(int id)
     {
         var Order = await _getID.GetID(id);
 
-        return _mapper.Map<ResponseOrder>(Order);
+        return _mapper.Map<ResponseOrderGet>(Order);
     }
 }

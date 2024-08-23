@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using PayMart.Domain.Orders.Interface.Orders.GetAll;
 using PayMart.Domain.Orders.Response.ListOfOrder;
-using PayMart.Domain.Orders.Response.Order;
+using PayMart.Domain.Orders.Response.Order.GetAll;
+using PayMart.Domain.Orders.Response.Order.Others;
 
 namespace PayMart.Application.Orders.UseCases.GetAll;
 
@@ -23,7 +24,7 @@ public class GetAllOrderUseCases : IGetAllOrderUseCases
 
         return new ResponseList
         {           
-            Orders = _mapper.Map<List<ResponseOrder>>(response)
+            Orders = _mapper.Map<List<ResponseOrderGet>>(response)
         };
     }
 }
