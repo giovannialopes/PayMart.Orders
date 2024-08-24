@@ -2,11 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PayMart.Domain.Orders.Interface.Database;
-using PayMart.Domain.Orders.Interface.Orders.Delete;
-using PayMart.Domain.Orders.Interface.Orders.GetAll;
-using PayMart.Domain.Orders.Interface.Orders.GetID;
-using PayMart.Domain.Orders.Interface.Orders.Post;
-using PayMart.Domain.Orders.Interface.Orders.Update;
+using PayMart.Domain.Orders.Interface.Repositories;
 using PayMart.Infrastructure.Orders.DataAcess;
 using PayMart.Infrastructure.Orders.Repositories;
 
@@ -22,16 +18,13 @@ public static class DependencyInjectionInfra
 
     public static void AddRepositories(IServiceCollection services)
     {
-        services.AddScoped<ICommit, OrderRepository>();
-        services.AddScoped<IPost, OrderRepository>();
-        services.AddScoped<IGetAll, OrderRepository>();
-        services.AddScoped<IGetID, OrderRepository>();
-        services.AddScoped<IUpdate, OrderRepository>();
-        services.AddScoped<IDelete, OrderRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
     }
 
     public static void AddDbContext(IServiceCollection services, IConfiguration configuration)
     {
+        services.AddScoped<ICommit, OrderRepository>();
+
         var connectionString = configuration.GetConnectionString("Connection");
         services.AddDbContext<DbOrder>(config => config.UseSqlServer(connectionString));
     }

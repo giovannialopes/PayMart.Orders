@@ -1,27 +1,25 @@
 ﻿using AutoMapper;
-using PayMart.Domain.Orders.Interface.Database;
-using PayMart.Domain.Orders.Interface.Orders.GetID;
+using PayMart.Domain.Orders.Interface.Repositories;
 using PayMart.Domain.Orders.Response.Order.GetAll;
-using PayMart.Domain.Orders.Response.Order.Others;
 
 namespace PayMart.Application.Orders.UseCases.GetID;
 
 public class GetIDOrderUseCases : IGetIDOrderUseCases
 {
 
+    private readonly IOrderRepository _orderRepository;
     private readonly IMapper _mapper;
-    private readonly IGetID _getID;
 
-    public GetIDOrderUseCases(IMapper mapper,
-        IGetID getID)
+    public GetIDOrderUseCases(IOrderRepository orderRepository
+        , IMapper mapper)
     {
+        _orderRepository = orderRepository;
         _mapper = mapper;
-        _getID = getID;
     }
 
     public async Task<ResponseOrderGet> Execute(int id)
     {
-        var Order = await _getID.GetID(id);
+        var Order = await _orderRepository.GetByIdOrder(id);
 
         return _mapper.Map<ResponseOrderGet>(Order);
     }

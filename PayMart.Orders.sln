@@ -5,13 +5,13 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{B3D89388-3BA2-494D-9527-EFB34234BDBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayMart.API.Orders", "Source\PayMart.API.Orders\PayMart.API.Orders.csproj", "{8096A5CE-7FE4-4D3F-877A-67C862A57C05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.API.Orders", "Source\PayMart.API.Orders\PayMart.API.Orders.csproj", "{8096A5CE-7FE4-4D3F-877A-67C862A57C05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayMart.Application.Orders", "Source\PayMart.Application.Orders\PayMart.Application.Orders.csproj", "{5EB228FB-8824-4E1C-BB32-DC7791A0C7EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Application.Orders", "Source\PayMart.Application.Orders\PayMart.Application.Orders.csproj", "{5EB228FB-8824-4E1C-BB32-DC7791A0C7EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayMart.Domain.Orders", "Source\PayMart.Domain.Orders\PayMart.Domain.Orders.csproj", "{231996E7-D85C-4D85-9687-42E61997CD77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Domain.Orders", "Source\PayMart.Domain.Orders\PayMart.Domain.Orders.csproj", "{231996E7-D85C-4D85-9687-42E61997CD77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayMart.Infrastructure.Orders", "Source\PayMart.Infrastructure.Orders\PayMart.Infrastructure.Orders.csproj", "{E2DB8D60-7FF9-47C6-8FB3-E2986E3CB972}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Infrastructure.Orders", "Source\PayMart.Infrastructure.Orders\PayMart.Infrastructure.Orders.csproj", "{E2DB8D60-7FF9-47C6-8FB3-E2986E3CB972}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,9 +1,5 @@
 ﻿using AutoMapper;
-using PayMart.Domain.Orders.Entities;
-using PayMart.Domain.Orders.Interface.Database;
-using PayMart.Domain.Orders.Interface.Orders.GetID;
-using PayMart.Domain.Orders.Interface.Orders.Post;
-using PayMart.Domain.Orders.Interface.Orders.Update;
+using PayMart.Domain.Orders.Interface.Repositories;
 using PayMart.Domain.Orders.Request;
 using PayMart.Domain.Orders.Response.Order.Others;
 
@@ -12,31 +8,31 @@ namespace PayMart.Application.Orders.UseCases.Update;
 public class UpdateOrderUseCases : IUpdateOrderUseCases
 {
     private readonly IMapper _mapper;
-    private readonly IGetID _getID;
-    private readonly IUpdate _update;
-    private readonly ICommit _commit;
+    private readonly IOrderRepository _orderRepository;
 
-    public UpdateOrderUseCases(IMapper mapper,
-        IGetID getID,
-        IUpdate update,
-        ICommit commit)
+    public UpdateOrderUseCases(IOrderRepository orderRepository,
+        IMapper mapper)
     {
         _mapper = mapper;
-        _getID = getID;
-        _update = update;
-        _commit = commit;
+        _orderRepository = orderRepository;
     }
 
     public async Task<ResponseOrder> Execute(RequestOrderUpdate request, int id)
     {
-        var Order = await _getID.GetID(id);
+        var verifyOrder = await _orderRepository.VerifyOrder(request.ProductID);
 
-        var response = _mapper.Map(request, Order);
+        if (verifyOrder != false)
+        {
+            var Order = await _orderRepository.GetByIdOrder(id);
 
-        _update.Update(response);
+            var response = _mapper.Map(request, Order);
 
-        await _commit.Commit();
+            _orderRepository.Update(response!);
 
-        return _mapper.Map<ResponseOrder>(response);
+            await _orderRepository.Commit();
+
+            return _mapper.Map<ResponseOrder>(response);
+        }
+        return null;
     }
 }

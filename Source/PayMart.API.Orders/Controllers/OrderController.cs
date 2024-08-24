@@ -40,6 +40,9 @@ public class OrderController : ControllerBase
     {
         request.UserID = userID;
         var response = await useCases.Execute(request);
+        if (response == null)
+            return Ok("");
+
         return Ok(response);
     }
 
@@ -52,6 +55,9 @@ public class OrderController : ControllerBase
     {
         request.ProductID = userID;
         var response = await useCases.Execute(request, id);
+        if (response == null)
+            return Ok("");
+
         return Ok(response);
     }
 

@@ -1,27 +1,24 @@
-﻿using AutoMapper;
-using PayMart.Domain.Orders.Interface.Database;
-using PayMart.Domain.Orders.Interface.Orders.Delete;
-using PayMart.Domain.Orders.Response.Order;
+﻿using PayMart.Domain.Orders.Interface.Repositories;
 
 namespace PayMart.Application.Orders.UseCases.Delete;
 
 public class DeleteOrderUseCases : IDeleteOrderUseCases
 {
-    private readonly IDelete _delete;
-    private readonly ICommit _commit;
+    private readonly IOrderRepository _orderRepository;
 
-    public DeleteOrderUseCases(IDelete delete,
-        ICommit commit)
+    public DeleteOrderUseCases(IOrderRepository orderRepository)
     {
-        _delete = delete;
-        _commit = commit;
+        _orderRepository = orderRepository;
     }
+
 
     public async Task Execute(int id)
     {
-        await _delete.Delete(id);
+        var getID = await _orderRepository.GetByIdOrder(id);
 
-        await _commit.Commit();
-      
+        _orderRepository.DeleteOrder(getID);
+
+        await _orderRepository.Commit();
+
     }
 }

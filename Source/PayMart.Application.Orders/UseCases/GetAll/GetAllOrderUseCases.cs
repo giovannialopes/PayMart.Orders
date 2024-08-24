@@ -1,26 +1,25 @@
 ﻿using AutoMapper;
-using PayMart.Domain.Orders.Interface.Orders.GetAll;
+using PayMart.Domain.Orders.Interface.Repositories;
 using PayMart.Domain.Orders.Response.ListOfOrder;
 using PayMart.Domain.Orders.Response.Order.GetAll;
-using PayMart.Domain.Orders.Response.Order.Others;
 
 namespace PayMart.Application.Orders.UseCases.GetAll;
 
 public class GetAllOrderUseCases : IGetAllOrderUseCases
 {
     private readonly IMapper _mapper;
-    private readonly IGetAll _getAll;
+    private readonly IOrderRepository _orderRepository;
 
-    public GetAllOrderUseCases(IMapper mapper,
-        IGetAll getAll)
+    public GetAllOrderUseCases(IOrderRepository orderRepository,
+        IMapper mapper)
     {
         _mapper = mapper;
-        _getAll = getAll;
+        _orderRepository = orderRepository;
     }
 
     public async Task<ResponseList> Execute()
     {
-        var response = await _getAll.GetAll();
+        var response = await _orderRepository.GetOrder();
 
         return new ResponseList
         {           

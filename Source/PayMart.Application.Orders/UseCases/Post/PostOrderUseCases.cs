@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using PayMart.Domain.Orders.Entities;
-using PayMart.Domain.Orders.Interface.Database;
-using PayMart.Domain.Orders.Interface.Orders.GetID;
-using PayMart.Domain.Orders.Interface.Orders.Post;
+using PayMart.Domain.Orders.Interface.Repositories;
 using PayMart.Domain.Orders.Request;
 using PayMart.Domain.Orders.Response.Order.Others;
 
@@ -11,32 +9,33 @@ namespace PayMart.Application.Orders.UseCases.Post;
 public class PostOrderUseCases : IPostOrderUseCases
 {
     private readonly IMapper _mapper;
-    private readonly IPost _post;
-    private readonly IGetID _getID;
-    private readonly ICommit _commit;
+    private readonly IOrderRepository _orderRepository;
 
-    public PostOrderUseCases(IMapper mapper,
-        IPost post,
-        ICommit commit,
-        IGetID getID)
+    public PostOrderUseCases(IOrderRepository orderRepository,
+        IMapper mapper)
     {
         _mapper = mapper;
-        _post = post;
-        _commit = commit;
-        _getID = getID;
+        _orderRepository = orderRepository;
     }
 
     public async Task<ResponseOrder> Execute(RequestOrder request)
     {
-        var Order = _mapper.Map<Order>(request);
+        var verifyOrder = await _orderRepository.VerifyOrder(request.ProductID);
 
-        await _post.Add(Order);
+        if (verifyOrder == false)
+        {
+            var Order = _mapper.Map<Order>(request);
+            _orderRepository.AddOrder(Order);
 
-        await _commit.Commit();
+            await _orderRepository.Commit();
 
-        var GetID = await _getID.GetID(Order.Id);
+            var GetID = await _orderRepository.GetByIdOrder(Order.Id);
 
-        return _mapper.Map<ResponseOrder>(GetID);
+            return _mapper.Map<ResponseOrder>(GetID);
+        }
+
+        return null;
+
 
     }
 }
