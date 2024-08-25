@@ -24,7 +24,7 @@ public class OrderRepository : IOrderRepository
 
     public void AddOrder(Order order) => _dbOrder.Tb_Order.AddAsync(order);
 
-    public void Update(Order order) => _dbOrder.Tb_Order.Update(order);
+    public void UpdateOrder(Order order) => _dbOrder.Tb_Order.Update(order);
 
     public void DeleteOrder(Order order) => _dbOrder.Tb_Order.Remove(order);
 

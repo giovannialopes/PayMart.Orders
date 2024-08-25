@@ -27,7 +27,7 @@ public class UpdateOrderUseCases : IUpdateOrderUseCases
 
             var response = _mapper.Map(request, Order);
 
-            _orderRepository.Update(response!);
+            _orderRepository.UpdateOrder(response!);
 
             await _orderRepository.Commit();
 

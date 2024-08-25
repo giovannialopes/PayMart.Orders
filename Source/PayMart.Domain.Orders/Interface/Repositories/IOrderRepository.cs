@@ -13,7 +13,7 @@ public interface IOrderRepository : ICommit
 
     public void AddOrder(Order order);
 
-    public void Update(Order order);
+    public void UpdateOrder(Order order);
 
     public void DeleteOrder(Order order);
 
