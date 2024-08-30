@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PayMart.Application.Orders.UseCases.Delete;
-using PayMart.Application.Orders.UseCases.GetAll;
-using PayMart.Application.Orders.UseCases.GetID;
-using PayMart.Application.Orders.UseCases.Post;
-using PayMart.Application.Orders.UseCases.Update;
-using PayMart.Domain.Orders.Request;
+using PayMart.Domain.Orders.Model;
+using PayMart.Domain.Orders.Services.Delete;
+using PayMart.Domain.Orders.Services.GetAll;
+using PayMart.Domain.Orders.Services.GetID;
+using PayMart.Domain.Orders.Services.Post;
+using PayMart.Domain.Orders.Services.Update;
 
 namespace PayMart.API.Orders.Controllers;
 
@@ -15,17 +15,18 @@ public class OrderController : ControllerBase
     [HttpGet]
     [Route("getAll")]
     public async Task<IActionResult> GetAll(
-        [FromServices] IGetAllOrderUseCases useCases)
+        [FromServices] IGetAllOrder useCases)
     {
         var response = await useCases.Execute();
         return Ok(response);
     }
 
+
     [HttpGet]
     [Route("getID/{id}")]
     public async Task<IActionResult> GetID(
         [FromRoute] int id,
-        [FromServices] IGetIDOrderUseCases useCases)
+        [FromServices] IGetOrderByID useCases)
     {
         var response = await useCases.Execute(id);
         return Ok(response);
@@ -34,11 +35,11 @@ public class OrderController : ControllerBase
     [HttpPost]
     [Route("post/{userID}")]
     public async Task<IActionResult> Post(
-        [FromServices] IPostOrderUseCases useCases,
-        [FromBody] RequestOrder request,
+        [FromServices] IRegisterOrder useCases,
+        [FromBody] ModelOrder.CreateOrderRequest request,
         [FromRoute] int userID)
     {
-        request.UserID = userID;
+        request.UserId = userID;
         var response = await useCases.Execute(request);
         if (response == null)
             return Ok("");
@@ -49,11 +50,11 @@ public class OrderController : ControllerBase
     [HttpPut]
     [Route("update/{id}/{userID}")]
     public async Task<IActionResult> Update(
-        [FromServices] IUpdateOrderUseCases useCases,
+        [FromServices] IUpdateOrder useCases,
         [FromRoute] int id, int userID,
-        [FromBody] RequestOrderUpdate request)
+        [FromBody] ModelOrder.UpdateOrderRequest request)
     {
-        request.ProductID = userID;
+        request.ProductId = userID;
         var response = await useCases.Execute(request, id);
         if (response == null)
             return Ok("");
@@ -64,10 +65,13 @@ public class OrderController : ControllerBase
     [HttpDelete]
     [Route("delete/{id}")]
     public async Task<IActionResult> Delete(
-        [FromServices] IDeleteOrderUseCases useCases,
+        [FromServices] IDeleteOrder useCases,
         [FromRoute] int id)
     {
-        await useCases.Execute(id);
+        var response = await useCases.Execute(id);
+        if (response == null)
+            return Ok("");
+
         return Ok();
     }
 

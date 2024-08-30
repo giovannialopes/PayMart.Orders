@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{B3D893
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.API.Orders", "Source\PayMart.API.Orders\PayMart.API.Orders.csproj", "{8096A5CE-7FE4-4D3F-877A-67C862A57C05}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Application.Orders", "Source\PayMart.Application.Orders\PayMart.Application.Orders.csproj", "{5EB228FB-8824-4E1C-BB32-DC7791A0C7EF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Domain.Orders", "Source\PayMart.Domain.Orders\PayMart.Domain.Orders.csproj", "{231996E7-D85C-4D85-9687-42E61997CD77}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Infrastructure.Orders", "Source\PayMart.Infrastructure.Orders\PayMart.Infrastructure.Orders.csproj", "{E2DB8D60-7FF9-47C6-8FB3-E2986E3CB972}"
@@ -23,10 +21,6 @@ Global
 		{8096A5CE-7FE4-4D3F-877A-67C862A57C05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8096A5CE-7FE4-4D3F-877A-67C862A57C05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8096A5CE-7FE4-4D3F-877A-67C862A57C05}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5EB228FB-8824-4E1C-BB32-DC7791A0C7EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EB228FB-8824-4E1C-BB32-DC7791A0C7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EB228FB-8824-4E1C-BB32-DC7791A0C7EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EB228FB-8824-4E1C-BB32-DC7791A0C7EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{231996E7-D85C-4D85-9687-42E61997CD77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{231996E7-D85C-4D85-9687-42E61997CD77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{231996E7-D85C-4D85-9687-42E61997CD77}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,7 +35,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8096A5CE-7FE4-4D3F-877A-67C862A57C05} = {B3D89388-3BA2-494D-9527-EFB34234BDBE}
-		{5EB228FB-8824-4E1C-BB32-DC7791A0C7EF} = {B3D89388-3BA2-494D-9527-EFB34234BDBE}
 		{231996E7-D85C-4D85-9687-42E61997CD77} = {B3D89388-3BA2-494D-9527-EFB34234BDBE}
 		{E2DB8D60-7FF9-47C6-8FB3-E2986E3CB972} = {B3D89388-3BA2-494D-9527-EFB34234BDBE}
 	EndGlobalSection

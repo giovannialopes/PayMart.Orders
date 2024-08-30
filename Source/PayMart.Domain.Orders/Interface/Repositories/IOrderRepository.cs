@@ -5,11 +5,11 @@ namespace PayMart.Domain.Orders.Interface.Repositories;
 
 public interface IOrderRepository : ICommit
 {
-    public Task<List<Order?>> GetOrder();
+    public Task<List<Order>> GetOrder();
 
     public Task<Order?> GetByIdOrder(int id);
 
-    public Task<bool?> VerifyOrder(int productId);
+    public Task<bool?> VerifyOrderExisting(int productId);
 
     public void AddOrder(Order order);
 
