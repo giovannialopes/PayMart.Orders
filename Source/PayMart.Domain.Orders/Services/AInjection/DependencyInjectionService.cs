@@ -4,7 +4,6 @@ using PayMart.Domain.Orders.Services.Delete;
 using PayMart.Domain.Orders.Services.GetAll;
 using PayMart.Domain.Orders.Services.GetID;
 using PayMart.Domain.Orders.Services.Post;
-using PayMart.Domain.Orders.Services.Update;
 
 namespace PayMart.Domain.Orders.Services.AInjection;
 
@@ -26,7 +25,6 @@ public static class DependencyInjectionService
         services.AddScoped<IRegisterOrder, RegisterOrder>();
         services.AddScoped<IGetAllOrder, GetAllOrder>();
         services.AddScoped<IGetOrderByID, GetOrderByID>();
-        services.AddScoped<IUpdateOrder, UpdateOrder>();
         services.AddScoped<IDeleteOrder, DeleteOrder>();
     }
 

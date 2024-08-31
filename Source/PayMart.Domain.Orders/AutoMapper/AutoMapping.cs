@@ -14,11 +14,11 @@ public class AutoMapping : Profile
 
     private void RequestToEntity()
     {
-        CreateMap<ModelOrder.CreateOrderRequest, Order>();
-
-        CreateMap<ModelOrder.UpdateOrderRequest, Order>()
-            .ForMember(dest => dest.UserId, opt => opt.Ignore())
-            .ForMember(dest => dest.ProductId, opt => opt.Ignore());
+        CreateMap<ModelOrder.CreateOrderRequest, Order>()
+            .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price)) 
+            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status)) 
+            .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
+            .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId));
     }
 
     private void EntityToResponse()

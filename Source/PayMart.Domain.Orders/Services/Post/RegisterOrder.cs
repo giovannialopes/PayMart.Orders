@@ -2,6 +2,7 @@
 using PayMart.Domain.Orders.Entities;
 using PayMart.Domain.Orders.Interface.Repositories;
 using PayMart.Domain.Orders.Model;
+using PayMart.Domain.Orders.Utilities;
 
 namespace PayMart.Domain.Orders.Services.Post;
 
@@ -10,22 +11,16 @@ public class RegisterOrder(IOrderRepository orderRepository,
 {
     public async Task<ModelOrder.OrderResponse?> Execute(ModelOrder.CreateOrderRequest request)
     {
-        var verifyOrder = await orderRepository.VerifyOrderExisting(request.ProductId);
+        var Order = mapper.Map<Order>(request);
+        Order.CreatedBy = request.UserId;
+       
+        orderRepository.AddOrder(Order);
 
-        if (verifyOrder == false)
-        {
-            var Order = mapper.Map<Order>(request);
-            Order.CreatedBy = request.UserId;
+        await orderRepository.Commit();
 
-            orderRepository.AddOrder(Order);
+        var GetID = await orderRepository.GetByIdOrder(Order.Id);
 
-            await orderRepository.Commit();
+        return mapper.Map<ModelOrder.OrderResponse>(GetID);
 
-            var GetID = await orderRepository.GetByIdOrder(Order.Id);
-
-            return mapper.Map<ModelOrder.OrderResponse>(GetID);
-        }
-
-        return default;
     }
 }

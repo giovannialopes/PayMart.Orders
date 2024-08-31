@@ -7,23 +7,19 @@ public class ModelOrder
 {
     public class CreateOrderRequest
     {
-        public string OrderName { get; set; } = string.Empty;
-        public int ProductId { get; set; }
+        public List<int> ProductIds { get; set; } = new List<int>();
 
         [JsonIgnore]
         public OrderStatus Status { get; set; }
 
         [JsonIgnore]
         public int UserId { get; set; }
-    }
-
-    public class UpdateOrderRequest
-    {      
-        public string OrderName { get; set; } = string.Empty;
-        public int ProductId { get; set; }
 
         [JsonIgnore]
-        public OrderStatus Status { get; set; }
+        public decimal Price { get; set; }
+
+        [JsonIgnore]
+        public string ProductId { get; set; } = string.Empty;
     }
 
     public class OrderResponse
@@ -32,13 +28,14 @@ public class ModelOrder
         public string OrderName { get; set; } = string.Empty;
         public DateTime OrderDate { get; set; }
         public int UserId { get; set; }
-        public int ProductId { get; set; }
-        public OrderStatus Status { get; set; }
+        public string ProductId { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty ;
     }
 
     public class ListOrderResponse
     {
         public List<OrderResponse> Orders { get; set; } = [];
     }
+
 
 }

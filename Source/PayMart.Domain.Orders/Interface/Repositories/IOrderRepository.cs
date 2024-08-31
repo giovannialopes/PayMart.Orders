@@ -9,8 +9,6 @@ public interface IOrderRepository : ICommit
 
     public Task<Order?> GetByIdOrder(int id);
 
-    public Task<bool?> VerifyOrderExisting(int productId);
-
     public void AddOrder(Order order);
 
     public void UpdateOrder(Order order);

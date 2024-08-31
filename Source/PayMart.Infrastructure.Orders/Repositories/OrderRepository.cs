@@ -20,8 +20,6 @@ public class OrderRepository : IOrderRepository
 
     public async Task<Order?> GetByIdOrder(int id) => await _dbOrder.Tb_Order.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id && config.DeleteBy == 0);
 
-    public async Task<bool?> VerifyOrderExisting(int productId) => await _dbOrder.Tb_Order.AsNoTracking().AnyAsync(config => config.ProductId == productId);
-
     public void AddOrder(Order order) => _dbOrder.Tb_Order.AddAsync(order);
 
     public void UpdateOrder(Order order) => _dbOrder.Tb_Order.Update(order);
