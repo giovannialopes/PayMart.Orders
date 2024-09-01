@@ -10,6 +10,7 @@ public class AutoMapping : Profile
     {
         RequestToEntity();
         EntityToResponse();
+        StringToResponse();
     }
 
     private void RequestToEntity()
@@ -25,5 +26,11 @@ public class AutoMapping : Profile
     {
         CreateMap<Order, ModelOrder.OrderResponse>();
         CreateMap<Order, ModelOrder.ListOrderResponse>();
+    }
+
+    private void StringToResponse()
+    {
+        CreateMap<string, ModelOrder.OrderResponse>();
+        CreateMap<string, ModelOrder.ListOrderResponse>();
     }
 }

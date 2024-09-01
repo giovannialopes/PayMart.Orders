@@ -5,11 +5,11 @@ using static PayMart.Domain.Orders.Model.ModelProduct;
 
 namespace PayMart.Domain.Orders.Http.Product;
 
-public class GetPriceProduct
+public class HttpProduct
 {
     private static HttpClient _http;
 
-    static GetPriceProduct()
+    static HttpProduct()
     {
         _http = new HttpClient();
     }

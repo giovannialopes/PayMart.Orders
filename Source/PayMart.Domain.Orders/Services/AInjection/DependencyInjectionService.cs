@@ -1,9 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PayMart.Domain.Orders.AutoMapper;
-using PayMart.Domain.Orders.Services.Delete;
-using PayMart.Domain.Orders.Services.GetAll;
-using PayMart.Domain.Orders.Services.GetID;
-using PayMart.Domain.Orders.Services.Post;
 
 namespace PayMart.Domain.Orders.Services.AInjection;
 
@@ -22,10 +18,7 @@ public static class DependencyInjectionService
 
     public static void AddRepositories(IServiceCollection services)
     {
-        services.AddScoped<IRegisterOrder, RegisterOrder>();
-        services.AddScoped<IGetAllOrder, GetAllOrder>();
-        services.AddScoped<IGetOrderByID, GetOrderByID>();
-        services.AddScoped<IDeleteOrder, DeleteOrder>();
+        services.AddScoped<IOrderServices, OrderServices>();
     }
 
 
