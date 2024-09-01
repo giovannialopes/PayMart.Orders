@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PayMart.Domain.Orders.Exceptions;
 using PayMart.Domain.Orders.Http.Product;
 using PayMart.Domain.Orders.Model;
 using PayMart.Domain.Orders.Services;
@@ -15,10 +16,10 @@ public class OrderController : ControllerBase
         [FromServices] IOrderServices services)
     {
         var response = await services.GetOrders();
-        if(response.Response != null)
-            return Ok(response.Response);
+        if(response == null)
+            return Ok(ResourceExceptions.ERRO_ORDER_NÃO_ENCONTRADA);
 
-        return Ok(response.Error);
+        return Ok(response);
     }
 
     [HttpGet]
@@ -28,10 +29,10 @@ public class OrderController : ControllerBase
         [FromServices] IOrderServices services)
     {
         var response = await services.GetOrderById(id);
-        if (response.Response != null)
-            return Ok(response.Response);
+        if (response == null)
+            return Ok(ResourceExceptions.ERRO_ORDER_NÃO_ENCONTRADA);
 
-        return Ok(response.Error);
+        return Ok(response);
     }
 
     [HttpPost]
@@ -55,6 +56,9 @@ public class OrderController : ControllerBase
         [FromRoute] int id)
     {
         var response = await services.DeleteOrder(id);
+        if (response == null)
+            return Ok(ResourceExceptions.ERRO_ORDER_NÃO_ENCONTRADA);
+
         return Ok();
     }
 

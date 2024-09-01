@@ -10,24 +10,22 @@ namespace PayMart.Domain.Orders.Services;
 public class OrderServices(IOrderRepository orderRepository,
     IMapper mapper) : IOrderServices
 {
-    public async Task<(ModelOrder.ListOrderResponse? Response, string? Error)> GetOrders()
+    public async Task<ModelOrder.ListOrderResponse?> GetOrders()
     {
         var response = await orderRepository.GetOrder();
         if (response.Count != 0)
-            return (new ModelOrder.ListOrderResponse { Orders = mapper.Map<List<ModelOrder.OrderResponse>>(response) }, null);
+            return new ModelOrder.ListOrderResponse { Orders = mapper.Map<List<ModelOrder.OrderResponse>>(response) };
 
-        return (null, ResourceExceptions.ERRO_ORDER_NÃO_ENCONTRADA);
+        return default;
     }
 
-    public async Task<(ModelOrder.OrderResponse? Response, string? Error)> GetOrderById(int id)
+    public async Task<ModelOrder.OrderResponse?> GetOrderById(int id)
     {
         var Order = await orderRepository.GetByIdOrder(id);
         if (Order != null)
-        {
-            var orderResponse = mapper.Map<ModelOrder.OrderResponse>(Order);
-            return (orderResponse, null);
-        }
-        return (null, ResourceExceptions.ERRO_ORDER_NÃO_ENCONTRADA);
+           return mapper.Map<ModelOrder.OrderResponse>(Order);
+
+       return default;
     }
 
     public async Task<ModelOrder.OrderResponse?> RegisterOrder(ModelOrder.CreateOrderRequest request)
@@ -60,6 +58,6 @@ public class OrderServices(IOrderRepository orderRepository,
 
             return "Deleted";
         }
-        return ResourceExceptions.ERRO_ORDER_NÃO_ENCONTRADA;
+        return default;
     }
 }
