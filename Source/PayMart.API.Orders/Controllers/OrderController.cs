@@ -59,7 +59,7 @@ public class OrderController : ControllerBase
         if (response == null)
             return Ok(ResourceExceptions.ERRO_ORDER_NÃO_ENCONTRADA);
 
-        return Ok();
+        return Ok(response);
     }
 
 }
