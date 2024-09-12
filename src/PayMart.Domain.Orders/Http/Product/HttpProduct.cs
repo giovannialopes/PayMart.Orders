@@ -16,7 +16,10 @@ public class HttpProduct
 
     public static async Task GetSumProducts(CreateOrderRequest request)
     {
-        var httpResponse = await _http.GetStringAsync($"https://localhost:5002/api/Product/getAll");
+        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        var host = environment == "Development" ? "localhost" : "paymart-products";
+
+        var httpResponse = await _http.GetStringAsync($"http://{host}:5002/api/Product/getAll");
         var responseProduct = FormatterGetAll(httpResponse);
         var filteredProducts = responseProduct
             .Where(product => request.ProductIds.Contains(product.Id))
